@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Tarefas</title>
+    <style>
+        .completed {
+            text-decoration: line-through;
+            color:rgb(43,21,125);
+        }
+    </style>
+</head>
+<body>
+    <h1>Lista de Tarefas</h1>
+
+    <!-- Campo de input e botão para adicionar tarefas -->
+    <input type="text" id="taskInput" placeholder="Digite uma tarefa" />
+    <button id="addTaskBtn">Adicionar Tarefa</button>
+
+    <!-- Lista onde as tarefas serão adicionadas -->
+    <ul id="taskList"></ul>
+
+    <script>
+        // Acessando os elementos do DOM
+        const taskInput = document.getElementById('taskInput');
+        const addTaskBtn = document.getElementById('addTaskBtn');
+        const taskList = document.getElementById('taskList');
+
+        // Função para adicionar uma nova tarefa
+        function addTask() {
+            // Obtém o valor digitado no input
+            const taskText = taskInput.value.trim();
+
+            // Verifica se o input não está vazio
+            if (taskText !== '') {
+                // Cria um novo elemento <li>
+                const newTask = document.createElement('li');
+                newTask.textContent = taskText;
+
+                // Adiciona um evento de clique para marcar a tarefa como concluída
+                newTask.addEventListener('click', () => {
+                    newTask.classList.toggle('completed');
+                });
+
+                // Adiciona a nova tarefa (li) à lista (ul)
+                taskList.appendChild(newTask);
+
+                // Limpa o campo de input após adicionar a tarefa
+                taskInput.value = '';
+            } else {
+                alert('Digite uma tarefa antes de adicionar!');
+            }
+        }
+
+        // Adiciona o evento de clique no botão para chamar a função addTask
+        addTaskBtn.addEventListener('click', addTask);
+    </script>
+</body>
+</html>
